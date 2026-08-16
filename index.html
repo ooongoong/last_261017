@@ -75,6 +75,79 @@
     to { transform: rotate(360deg); }
   }
 
+  /* ============ INTRO POPUP (첫 화면 안내) ============ */
+  .intro-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10400;
+    pointer-events: none;
+  }
+  .intro-popup-overlay.hidden { display: none; }
+  .intro-popup-close {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(74, 70, 64, 0.72);
+    backdrop-filter: blur(3px);
+    color: #fffefc;
+    font-size: 18px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+  }
+  .intro-popup-bgm-tip {
+    position: absolute;
+    top: 26px;
+    right: 68px;
+    max-width: 168px;
+    background: rgba(74, 70, 64, 0.88);
+    color: #fffefc;
+    font-family: 'GyeonggiBatang', serif;
+    font-size: 12.5px;
+    line-height: 1.55;
+    padding: 10px 13px;
+    border-radius: 12px;
+    text-align: left;
+  }
+  .intro-popup-bgm-tip::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    right: -6px;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 6px solid rgba(74, 70, 64, 0.88);
+  }
+  .intro-popup-scroll-tip {
+    position: absolute;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%);
+    background: rgba(74, 70, 64, 0.72);
+    color: #fffefc;
+    font-family: 'GyeonggiBatang', serif;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    padding: 10px 18px;
+    border-radius: 20px;
+    white-space: nowrap;
+    animation: intro-scroll-bounce 1.6s ease-in-out infinite;
+  }
+  @keyframes intro-scroll-bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
   /* ============ COVER (겉지) SECTION ============ */
   .cover-section {
     max-width: 480px;
@@ -761,6 +834,13 @@
   </button>
   <audio id="bgmAudio" src="assets/bgm.mp3" loop preload="none"></audio>
 
+  <!-- ============ INTRO POPUP (첫 화면 안내) ============ -->
+  <div class="intro-popup-overlay" id="introPopupOverlay">
+    <button class="intro-popup-close" id="introPopupClose" aria-label="안내 닫기">&times;</button>
+    <div class="intro-popup-bgm-tip">은행나무잎을 누르면<br>음악이 재생/정지됩니다</div>
+    <div class="intro-popup-scroll-tip">아래로 내려주세요</div>
+  </div>
+
   <!-- ============ COVER (겉지) SECTION ============ -->
   <section class="cover-section">
     <img src="assets/cover_full_v2.png" alt="청첩장 겉지" />
@@ -1150,6 +1230,25 @@
         startPlaying();
       }
     });
+  })();
+
+  /* ---- 첫 화면 안내 팝업 ---- */
+  (function () {
+    const overlay = document.getElementById('introPopupOverlay');
+    const closeBtn = document.getElementById('introPopupClose');
+    if (!overlay || !closeBtn) return;
+
+    function dismissPopup() {
+      overlay.classList.add('hidden');
+      window.removeEventListener('scroll', onScroll);
+    }
+    function onScroll() { dismissPopup(); }
+
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dismissPopup();
+    });
+    window.addEventListener('scroll', onScroll, { once: true, passive: true });
   })();
 
   /* ---- 인트로 캔버스 반응형 스케일 ---- */
