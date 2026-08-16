@@ -105,7 +105,7 @@
     position: relative;
     width: 100%;  /* 크롭된 캔버스 자체가 카드 실제 콘텐츠 폭이라 100% */
     margin: 0 auto;
-    background: #dde9b6 url('assets/grass_tile_v3.png') repeat-y top center;
+    background: #dde9b6 url('assets/grass_tile_v4.png') repeat-y top center;
     background-size: 100% auto;
   }
   .falling-leaves {
@@ -721,7 +721,7 @@
   <div class="inner-wrap" id="innerWrap">
     <div class="inner-window" id="innerWindow">
       <div class="inner-content" id="innerContent">
-        <img class="inner-full-img" src="assets/inner_full_v3.png" alt="청첩장 속지" />
+        <img class="inner-full-img" src="assets/inner_full_v4.png" alt="청첩장 속지" />
 
         <div class="falling-leaves" aria-hidden="true">
           <img class="falling-leaf" src="assets/leaf_icon.png" style="left:18%; top:12%; width:20px; --dx:-14px; --dy:640px; --rot:140deg; animation-delay:0s; animation-duration:7.5s;" />
@@ -988,7 +988,7 @@
     const img = document.querySelector('.inner-full-img');
     const patch = document.getElementById('innerTextPatch');
     if (!img || !patch || !img.offsetHeight) return;
-    const overlapPx = img.offsetHeight * 0.5; /* 부부 발끝과 텍스트 사이 여백을 줄이기 위해 패치를 더 위로 */
+    const overlapPx = img.offsetHeight * 0.46; /* 부부 발끝과 텍스트 사이 여백을 줄이기 위해 패치를 더 위로 */
     patch.style.marginTop = (-overlapPx) + 'px';
   }
   window.addEventListener('load', positionInnerPatch);
