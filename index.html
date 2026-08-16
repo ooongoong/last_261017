@@ -86,8 +86,8 @@
   }
   .inner-window {
     position: relative;
-    width: 78%;
-    max-width: 380px;
+    width: 100%;
+    max-width: 480px;
     margin: 0 auto;
     overflow: hidden;
     clip-path: inset(0 0 100% 0);
@@ -106,7 +106,10 @@
     width: 100%;
     max-width: 480px;
     margin: 0 auto;
-    background: #dceaae;
+    background-color: #dceaae;
+    background-image: url('assets/inner_grass_tex.png');
+    background-repeat: repeat;
+    background-size: 480px auto;
   }
   .falling-leaves {
     position: absolute;
@@ -222,6 +225,16 @@
   .calendar-section img {
     width: 100%;
     display: block;
+  }
+
+  .date-heading {
+    font-family: 'GyeonggiBatang', serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #4a4a4a;
+    text-align: center;
+    margin: 40px 0 8px;
+    letter-spacing: 0.02em;
   }
 
   /* ============ PHOTO SECTION ============ */
@@ -393,16 +406,17 @@
   .location-info-block { margin-bottom: 26px; }
   .location-static-map {
     display: block;
-    width: calc(100% + 56px);
+    width: 100%;
     max-width: none;
-    margin: 14px -28px 0;
+    margin: 14px 0 0;
     border-radius: 10px;
   }
   .location-map-caption {
     text-align: center;
-    font-size: 13px;
+    font-size: 15px;
+    font-weight: 700;
     line-height: 1.7;
-    color: #6f6a60;
+    color: #57524a;
     margin-top: 8px;
   }
   .location-info-title {
@@ -629,10 +643,36 @@
     max-width: 337px;
   }
 
+  .account-envelope-wrap {
+    position: relative;
+    width: 260px;
+    margin: 0 auto 8px;
+  }
   .account-envelope-img {
     display: block;
-    width: 168px;
-    margin: 0 auto 8px;
+    width: 100%;
+  }
+  .envelope-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 26%;
+    text-align: center;
+    font-family: 'GyeonggiBatang', serif;
+    font-size: 14px;
+    color: #4a4640;
+    letter-spacing: 0.02em;
+  }
+  .envelope-message {
+    position: absolute;
+    left: 14%;
+    right: 14%;
+    top: 42%;
+    text-align: center;
+    font-family: 'GyeonggiBatang', serif;
+    font-size: 9.5px;
+    line-height: 1.7;
+    color: #6f6a60;
   }
 
   .accordion {
@@ -737,7 +777,7 @@
   <div class="inner-wrap" id="innerWrap">
     <div class="inner-window" id="innerWindow">
       <div class="inner-content" id="innerContent">
-        <img class="inner-full-img" src="assets/inner_full_v5.png" alt="청첩장 속지" />
+        <img class="inner-full-img" src="assets/inner_top_v7.png" alt="청첩장 속지" />
 
         <div class="falling-leaves" aria-hidden="true">
           <img class="falling-leaf" src="assets/leaf_icon.png" style="left:18%; top:12%; width:20px; --dx:-14px; --dy:640px; --rot:140deg; animation-delay:0s; animation-duration:7.5s;" />
@@ -763,20 +803,21 @@
     </div>
   </div>
 
-  <!-- ============ INTRO (DATE/LOCATION) SECTION ============ -->
-  <div class="intro-wrap" id="introWrap">
-    <div class="intro-canvas" id="introCanvas">
-      <div class="intro-text">
-        <p class="intro-line1" id="introLine1">2026년 10월 17일 토요일 오후 3시</p>
-        <p class="intro-line2" id="introLine2">경복궁 국립고궁박물관 옆 은행나무 아래</p>
-      </div>
-    </div>
-  </div>
-
   <!-- ============ CALENDAR SECTION ============ -->
   <section class="calendar-section">
     <img src="assets/calendar.jpg" alt="10월 캘린더" />
   </section>
+
+  <!-- ============ INTRO (DATE/LOCATION) SECTION ============ -->
+  <p class="date-heading">Date</p>
+  <div class="intro-wrap" id="introWrap">
+    <div class="intro-canvas" id="introCanvas">
+      <div class="intro-text">
+        <p class="intro-line1" id="introLine1"></p>
+        <p class="intro-line2" id="introLine2"></p>
+      </div>
+    </div>
+  </div>
 
   <!-- ============ LETTER SECTION ============ -->
   <section class="letter-section">
@@ -835,11 +876,15 @@
       <div class="canvas-bg"></div>
       <div class="stack">
 
-        <img class="account-envelope-img" src="assets/account_envelope.png" alt="" />
+        <div class="account-envelope-wrap">
+          <img class="account-envelope-img" src="assets/account_envelope.png" alt="" />
+          <p class="envelope-title">마음 전하실 곳</p>
+          <p class="envelope-message">소중한 축하를 보내주셔서 감사드리며,<br>따뜻한 마음에 깊이 감사드립니다.</p>
+        </div>
 
         <div class="accordion" data-accordion>
           <button class="accordion-header" data-toggle>
-            <span>신랑측 마음 전하실 곳</span>
+            <span>신랑측</span>
             <svg class="chevron" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg>
           </button>
           <div class="accordion-panel">
@@ -868,7 +913,7 @@
 
         <div class="accordion" data-accordion>
           <button class="accordion-header" data-toggle>
-            <span>신부측 마음 전하실 곳</span>
+            <span>신부측</span>
             <svg class="chevron" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg>
           </button>
           <div class="accordion-panel">
@@ -938,7 +983,8 @@
   <section class="notice-section">
     <h2 class="notice-title">Notice</h2>
     <p class="notice-body">
-      국립고궁박물관은 시설 특성상 화환 반입이 금지되어 있어 화환은 정중히 사양하오니<br>
+      국립고궁박물관은 시설 특성상 화환 반입이 금지되어 있어<br>
+      화환은 정중히 사양하오니<br>
       너그러운 마음으로 협조해 주시면 감사하겠습니다.
     </p>
   </section>
@@ -990,18 +1036,8 @@
     step();
   }
 
-  /* ---- 속지 텍스트 패치를 이미지 하단 42% 지점에 정확히 겹치도록 배치 ---- */
-  function positionInnerPatch() {
-    const img = document.querySelector('.inner-full-img');
-    const patch = document.getElementById('innerTextPatch');
-    if (!img || !patch || !img.offsetHeight) return;
-    const overlapPx = img.offsetHeight * 0.4816; /* 잔디 언덕이 창 너비만큼 완전히 퍼지는 지점(원본 이미지 기준 약 51.8%)에 정확히 맞춰 이어붙임 */
-    patch.style.marginTop = (-overlapPx) + 'px';
-  }
-  window.addEventListener('load', positionInnerPatch);
-  window.addEventListener('resize', positionInnerPatch);
-  positionInnerPatch();
-  setTimeout(positionInnerPatch, 300);
+  /* ---- 속지 이미지와 텍스트 패치가 같은 폭으로 이어지므로 별도 오버랩 계산이 필요 없음 ---- */
+
 
   /* ---- 속지가 화면에 들어오면, 위→아래로 서서히 내려오는 효과 재생 후 타이핑 시작 ---- */
   (function () {
@@ -1137,6 +1173,57 @@
   window.addEventListener('resize', fitIntroCanvas);
   window.addEventListener('load', fitIntroCanvas);
   fitIntroCanvas();
+
+  /* ---- 인트로 타이핑 효과 ---- */
+  (function () {
+    const line1 = document.getElementById('introLine1');
+    const line2 = document.getElementById('introLine2');
+    const text1 = '2026년 10월 17일 토요일 오후 3시';
+    const text2 = '경복궁 국립고궁박물관 옆 은행나무 아래';
+    const typeSpeed = 90;
+    const lineGap = 450;
+
+    const cursor = document.createElement('span');
+    cursor.className = 'intro-cursor';
+
+    function typeInto(el, text, speed, onDone) {
+      let i = 0;
+      el.appendChild(cursor);
+      function step() {
+        if (i < text.length) {
+          el.insertBefore(document.createTextNode(text[i]), cursor);
+          i++;
+          setTimeout(step, speed);
+        } else if (onDone) {
+          onDone();
+        }
+      }
+      step();
+    }
+
+    function startTyping() {
+      typeInto(line1, text1, typeSpeed, () => {
+        setTimeout(() => {
+          typeInto(line2, text2, typeSpeed, () => {
+            setTimeout(() => { cursor.style.opacity = '0'; }, 1400);
+          });
+        }, lineGap);
+      });
+    }
+
+    const introEl = document.getElementById('introCanvas');
+    let started = false;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !started) {
+          started = true;
+          startTyping();
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+    observer.observe(introEl);
+  })();
 
   /* ---- 포토 갤러리: 더보기 / 접기 ---- */
   const photoFiles = [
