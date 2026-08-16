@@ -305,7 +305,7 @@
     font-family: 'GyeonggiBatang', serif;
     font-size: 14px;
     color: #fffefc;
-    background: #3d4653;
+    background: #4a4640;
     border: none;
     border-radius: 24px;
     padding: 11px 24px;
@@ -314,9 +314,12 @@
     gap: 7px;
     cursor: pointer;
     letter-spacing: 0.02em;
+    transition: background 0.2s ease;
   }
+  .more-btn:hover { background: #5c5850; }
   .more-btn svg { width: 11px; height: 11px; transition: transform 0.35s ease; }
   .more-btn svg path { fill: none; stroke: #fffefc; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .more-btn.open { background: #9fb8ad; }
   .more-btn.open svg { transform: rotate(180deg); }
 
   /* ============ LOCATION SECTION ============ */
@@ -343,7 +346,7 @@
     gap: 10px;
     flex-wrap: wrap;
     text-align: center;
-    font-size: 13px;
+    font-size: 16px;
     margin-bottom: 26px;
   }
   .location-copy-btn {
@@ -351,15 +354,15 @@
     padding: 6px 13px;
     font-family: inherit;
     font-size: 12px;
-    color: #6f6a60;
-    background: #f4f1ea;
-    border: 1px solid #e4dfd3;
+    color: #fffefc;
+    background: #4a4640;
+    border: 1px solid #4a4640;
     border-radius: 20px;
     cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     white-space: nowrap;
   }
-  .location-copy-btn:hover { background: #ebe6da; }
+  .location-copy-btn:hover { background: #5c5850; border-color: #5c5850; }
   .location-copy-btn.copied { background: #9fb8ad; border-color: #9fb8ad; color: #fffefc; }
   .location-copy-btn .check-icon { color: #fffefc; font-size: 13px; font-weight: 700; }
 
@@ -392,6 +395,13 @@
     display: block;
     width: 100%;
     border-radius: 10px;
+    margin-top: 14px;
+  }
+  .location-map-caption {
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #6f6a60;
     margin-top: 14px;
   }
   .location-info-title {
@@ -447,6 +457,10 @@
     font-size: 13px;
     line-height: 1.9;
     color: #57524a;
+    padding: 46px 26px 40px;
+    background-image: url('assets/notice_paper.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
   }
 
   /* ============ SHARE SECTION ============ */
@@ -456,8 +470,9 @@
     background: #fffefc;
     aspect-ratio: 1366 / 440;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
+    padding-bottom: 48px;
   }
   .share-btn {
     font-family: 'GyeonggiBatang', serif;
@@ -583,44 +598,36 @@
     font-family: monospace;
   }
 
-  /* ============ ACCOUNT SECTION (반응형 스케일 래퍼) ============ */
+  /* ============ ACCOUNT SECTION (순수 CSS 중앙 정렬) ============ */
   .account-wrap {
     position: relative;
     width: 100%;
-    overflow: hidden;
+    background-color: #fffefc;
   }
 
   .canvas {
     position: relative;
-    width: 1366px;
-    min-height: 516px;
-    background-color: #fffefc;
-    overflow: hidden;
-    transform-origin: top left;
+    width: 100%;
   }
 
   .canvas-bg {
-    position: absolute;
-    inset: 0;
-    background-image: url('assets/account_bg.png');
-    background-repeat: no-repeat;
-    background-position: center -310px;
-    background-size: auto;
+    display: none;
   }
 
   .stack {
     position: relative;
-    padding: 100px 0;
+    padding: 60px 20px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    width: 337px;
+    width: 100%;
+    max-width: 337px;
   }
 
   .accordion {
-    width: 337px;
+    width: 100%;
     background: #fffefc;
     border-radius: 50px;
     box-shadow: 0 4px 14px rgba(120, 110, 90, 0.14);
@@ -772,40 +779,34 @@
     <p class="photo-heading">Wedding Gallery</p>
 
     <div class="gallery-grid" id="galleryGrid">
-      <div class="photo-item" data-index="0" data-filename="photo01.jpg"><img src="images/photo01.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-      <div class="photo-item" data-index="1" data-filename="YUH03565.JPG"><img src="images/YUH03565.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-      <div class="photo-item" data-index="2" data-filename="YUH03533.JPG"><img src="images/YUH03533.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-      <div class="photo-item" data-index="3" data-filename="YUH03467.JPG"><img src="images/YUH03467.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-      <div class="photo-item" data-index="4" data-filename="YUH03330.JPG"><img src="images/YUH03330.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-      <div class="photo-item" data-index="5" data-filename="YUH03277.JPG"><img src="images/YUH03277.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+      <div class="photo-item" data-index="0" data-filename="IMG_5200.JPG"><img src="images/IMG_5200.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+      <div class="photo-item" data-index="1" data-filename="YUH03603.jpg"><img src="images/YUH03603.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+      <div class="photo-item" data-index="2" data-filename="YUH03565.jpg"><img src="images/YUH03565.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+      <div class="photo-item" data-index="3" data-filename="YUH03533.jpg"><img src="images/YUH03533.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+      <div class="photo-item" data-index="4" data-filename="YUH03467.jpg"><img src="images/YUH03467.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+      <div class="photo-item" data-index="5" data-filename="YUH03330.jpg"><img src="images/YUH03330.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
 
       <div class="extra-wrap" id="extraWrap">
         <div class="extra-inner">
           <div class="extra-grid">
-            <div class="photo-item" data-index="6" data-filename="YUH03140.JPG"><img src="images/YUH03140.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="7" data-filename="YUH03026.JPG"><img src="images/YUH03026.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="8" data-filename="YUH02941.JPG"><img src="images/YUH02941.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="9" data-filename="YUH02564.JPG"><img src="images/YUH02564.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="10" data-filename="YUH02555.JPG"><img src="images/YUH02555.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="11" data-filename="YUH02497.JPG"><img src="images/YUH02497.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="12" data-filename="YUH02448.JPG"><img src="images/YUH02448.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="13" data-filename="YUH02406.JPG"><img src="images/YUH02406.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="14" data-filename="YUH02357.JPG"><img src="images/YUH02357.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="15" data-filename="YUH02325.JPG"><img src="images/YUH02325.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="16" data-filename="YUH02232.JPG"><img src="images/YUH02232.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="17" data-filename="YUH02024.JPG"><img src="images/YUH02024.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="18" data-filename="YUH01980.JPG"><img src="images/YUH01980.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="19" data-filename="YUH01660.JPG"><img src="images/YUH01660.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="20" data-filename="YUH01642.JPG"><img src="images/YUH01642.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="21" data-filename="YUH01353.JPG"><img src="images/YUH01353.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="22" data-filename="YUH01347.JPG"><img src="images/YUH01347.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="23" data-filename="YUH01177.JPG"><img src="images/YUH01177.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="24" data-filename="YUH00387.JPG"><img src="images/YUH00387.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="25" data-filename="YUH00322.JPG"><img src="images/YUH00322.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="26" data-filename="YUH00239.JPG"><img src="images/YUH00239.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="27" data-filename="YUH00167.JPG"><img src="images/YUH00167.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="28" data-filename="YUH00087.JPG"><img src="images/YUH00087.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
-            <div class="photo-item" data-index="29" data-filename="YUH00311.JPG"><img src="images/YUH00311.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="6" data-filename="IMG_6278.jpg"><img src="images/IMG_6278.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="7" data-filename="IMG_6598.JPG"><img src="images/IMG_6598.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="8" data-filename="IMG_6619.JPG"><img src="images/IMG_6619.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="9" data-filename="IMG_6648.JPG"><img src="images/IMG_6648.JPG" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="10" data-filename="YUH02448.jpg"><img src="images/YUH02448.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="11" data-filename="YUH02406.jpg"><img src="images/YUH02406.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="12" data-filename="YUH02357.jpg"><img src="images/YUH02357.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="13" data-filename="YUH02325.jpg"><img src="images/YUH02325.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="14" data-filename="YUH02232.jpg"><img src="images/YUH02232.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="15" data-filename="YUH02024.jpg"><img src="images/YUH02024.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="16" data-filename="IMG_7789.jpg"><img src="images/IMG_7789.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="17" data-filename="IMG_7791.jpg"><img src="images/IMG_7791.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="18" data-filename="IMG_7792.jpg"><img src="images/IMG_7792.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="19" data-filename="YUH01353.jpg"><img src="images/YUH01353.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="20" data-filename="YUH01177.jpg"><img src="images/YUH01177.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="21" data-filename="YUH00387.jpg"><img src="images/YUH00387.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="22" data-filename="YUH00322.jpg"><img src="images/YUH00322.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
+            <div class="photo-item" data-index="23" data-filename="YUH00239.jpg"><img src="images/YUH00239.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('broken')"></div>
           </div>
         </div>
       </div>
@@ -894,7 +895,7 @@
 
     <div class="location-address-row">
       <span>서울 종로구 효자로 12 국립고궁박물관</span>
-      <button class="location-copy-btn" id="addrCopyBtn" data-copy="서울 종로구 효자로 12 국립고궁박물관">Copy</button>
+      <button class="location-copy-btn" id="addrCopyBtn" data-copy="서울 종로구 효자로 12 국립고궁박물관">복사하기</button>
     </div>
 
     <div class="location-map">
@@ -921,7 +922,8 @@
         <li>자가용 이용 시에는 박물관 주차장이 없으므로 경복궁 주차장을 이용하시기 바랍니다.</li>
         <li>내비게이션: '경복궁주차장' 검색</li>
       </ul>
-      <img class="location-static-map" src="assets/p7_map.png" alt="오시는 길 약도" />
+      <img class="location-static-map" src="assets/p7_map_v2.png" alt="오시는 길 약도" />
+      <p class="location-map-caption">경복궁역 5번 출구에서 나와서 앞으로 직진하시면<br>예식장소인 은행나무가 보입니다</p>
     </div>
 
   </section>
@@ -956,7 +958,7 @@
       <span class="lb-missing-filename" id="lbMissingFilename"></span>
     </div>
     <button class="lb-arrow lb-next" id="lbNext" aria-label="다음 사진">&#10095;</button>
-    <div class="lb-counter" id="lbCounter">1 / 29</div>
+    <div class="lb-counter" id="lbCounter">1 / 24</div>
   </div>
 
 <script>
@@ -1066,11 +1068,10 @@
         document.execCommand('copy');
         document.body.removeChild(ta);
       }
-      const original = btn.textContent;
-      btn.innerHTML = '<span class="check-icon">&#10003;</span>';
+      btn.textContent = '복사됨';
       btn.classList.add('copied');
       setTimeout(() => {
-        btn.textContent = original;
+        btn.textContent = '복사하기';
         btn.classList.remove('copied');
       }, 1600);
     });
@@ -1183,35 +1184,11 @@
     observer.observe(introEl);
   })();
 
-  /* ---- 계좌 캔버스 반응형 스케일 (1366px 고정 디자인을 모바일 폭에 맞춤) ---- */
-  function fitAccountCanvas() {
-    const wrap = document.getElementById('accountWrap');
-    const canvas = document.getElementById('canvas');
-    const ZOOM = 2.3; /* 계좌 카드가 다른 페이지들과 비슷한 비중으로 보이도록 확대 */
-    const baseScale = wrap.clientWidth / 1366;
-    const scale = baseScale * ZOOM;
-    const tx = -(wrap.clientWidth * (ZOOM - 1)) / 2;
-    canvas.style.transform = 'translateX(' + tx + 'px) scale(' + scale + ')';
-    wrap.style.height = (canvas.offsetHeight * scale) + 'px';
-  }
-  window.addEventListener('resize', fitAccountCanvas);
-  window.addEventListener('load', fitAccountCanvas);
 
-  // 아코디언이 펼쳐지거나 접힐 때마다 높이를 다시 계산 (transition 끝난 후)
-  document.querySelectorAll('.accordion-panel').forEach(panel => {
-    panel.addEventListener('transitionend', fitAccountCanvas);
-  });
-
-  fitAccountCanvas();
-  setTimeout(fitAccountCanvas, 300);
 
   /* ---- 포토 갤러리: 더보기 / 접기 ---- */
   const photoFiles = [
-    "photo01.jpg","YUH03565.JPG","YUH03533.JPG","YUH03467.JPG","YUH03330.JPG","YUH03277.JPG",
-    "YUH03140.JPG","YUH03026.JPG","YUH02941.JPG","YUH02564.JPG","YUH02555.JPG","YUH02497.JPG",
-    "YUH02448.JPG","YUH02406.JPG","YUH02357.JPG","YUH02325.JPG","YUH02232.JPG","YUH02024.JPG",
-    "YUH01980.JPG","YUH01660.JPG","YUH01642.JPG","YUH01353.JPG","YUH01347.JPG","YUH01177.JPG",
-    "YUH00387.JPG","YUH00322.JPG","YUH00239.JPG","YUH00167.JPG","YUH00087.JPG","YUH00311.JPG"
+    "IMG_5200.JPG","YUH03603.jpg","YUH03565.jpg","YUH03533.jpg","YUH03467.jpg","YUH03330.jpg","IMG_6278.jpg","IMG_6598.JPG","IMG_6619.JPG","IMG_6648.JPG","YUH02448.jpg","YUH02406.jpg","YUH02357.jpg","YUH02325.jpg","YUH02232.jpg","YUH02024.jpg","IMG_7789.jpg","IMG_7791.jpg","IMG_7792.jpg","YUH01353.jpg","YUH01177.jpg","YUH00387.jpg","YUH00322.jpg","YUH00239.jpg"
   ];
   const total = photoFiles.length;
 
