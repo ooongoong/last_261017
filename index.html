@@ -106,7 +106,7 @@
     width: 100%;
     max-width: 480px;
     margin: 0 auto;
-    background: linear-gradient(180deg, #dde9b6 0%, #d6e2ac 100%);
+    background: #dceaae;
   }
   .falling-leaves {
     position: absolute;
@@ -375,10 +375,10 @@
     background: #eee;
     margin-bottom: 10px;
   }
-  .location-map iframe {
+  .location-map img {
     width: 100%;
     height: 100%;
-    border: 0;
+    object-fit: cover;
     display: block;
   }
   .location-map-link {
@@ -393,16 +393,17 @@
   .location-info-block { margin-bottom: 26px; }
   .location-static-map {
     display: block;
-    width: 100%;
+    width: calc(100% + 56px);
+    max-width: none;
+    margin: 14px -28px 0;
     border-radius: 10px;
-    margin-top: 14px;
   }
   .location-map-caption {
     text-align: center;
     font-size: 13px;
     line-height: 1.7;
     color: #6f6a60;
-    margin-top: 14px;
+    margin-top: 8px;
   }
   .location-info-title {
     font-size: 16px;
@@ -461,6 +462,8 @@
     background-image: url('assets/notice_paper.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    word-break: keep-all;
+    word-wrap: break-word;
   }
 
   /* ============ SHARE SECTION ============ */
@@ -616,38 +619,44 @@
 
   .stack {
     position: relative;
-    padding: 60px 20px;
+    padding: 30px 20px 60px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 14px;
     width: 100%;
     max-width: 337px;
+  }
+
+  .account-envelope-img {
+    display: block;
+    width: 168px;
+    margin: 0 auto 8px;
   }
 
   .accordion {
     width: 100%;
     background: #fffefc;
-    border-radius: 50px;
+    border-radius: 26px;
     box-shadow: 0 4px 14px rgba(120, 110, 90, 0.14);
     overflow: hidden;
     transition: border-radius 0.35s ease;
   }
-  .accordion.is-open { border-radius: 28px; }
+  .accordion.is-open { border-radius: 20px; }
 
   .accordion-header {
     width: 100%;
-    height: 87px;
+    height: 44px;
     background: transparent;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     cursor: pointer;
     font-family: inherit;
-    font-size: 18px;
+    font-size: 14px;
     color: #4a4640;
     letter-spacing: 0.02em;
   }
@@ -679,9 +688,9 @@
 
   .copy-btn {
     flex-shrink: 0;
-    padding: 7px 14px;
+    padding: 6px 12px;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 12px;
     color: #6f6a60;
     background: #f4f1ea;
     border: 1px solid #e4dfd3;
@@ -754,20 +763,20 @@
     </div>
   </div>
 
-  <!-- ============ CALENDAR SECTION ============ -->
-  <section class="calendar-section">
-    <img src="assets/calendar.jpg" alt="10월 캘린더" />
-  </section>
-
   <!-- ============ INTRO (DATE/LOCATION) SECTION ============ -->
   <div class="intro-wrap" id="introWrap">
     <div class="intro-canvas" id="introCanvas">
       <div class="intro-text">
-        <p class="intro-line1" id="introLine1"></p>
-        <p class="intro-line2" id="introLine2"></p>
+        <p class="intro-line1" id="introLine1">2026년 10월 17일 토요일 오후 3시</p>
+        <p class="intro-line2" id="introLine2">경복궁 국립고궁박물관 옆 은행나무 아래</p>
       </div>
     </div>
   </div>
+
+  <!-- ============ CALENDAR SECTION ============ -->
+  <section class="calendar-section">
+    <img src="assets/calendar.jpg" alt="10월 캘린더" />
+  </section>
 
   <!-- ============ LETTER SECTION ============ -->
   <section class="letter-section">
@@ -825,6 +834,8 @@
     <div class="canvas" id="canvas">
       <div class="canvas-bg"></div>
       <div class="stack">
+
+        <img class="account-envelope-img" src="assets/account_envelope.png" alt="" />
 
         <div class="accordion" data-accordion>
           <button class="accordion-header" data-toggle>
@@ -899,12 +910,7 @@
     </div>
 
     <div class="location-map">
-      <iframe
-        src="https://naver.me/x0UPas8n"
-        title="국립고궁박물관 네이버 지도"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen></iframe>
+      <img src="assets/location_map_static.jpg" alt="국립고궁박물관 오시는 길 지도" />
     </div>
     <a class="location-map-link" href="https://naver.me/x0UPas8n" target="_blank" rel="noopener">네이버지도 앱/웹에서 크게 보기</a>
 
@@ -922,7 +928,7 @@
         <li>자가용 이용 시에는 박물관 주차장이 없으므로 경복궁 주차장을 이용하시기 바랍니다.</li>
         <li>내비게이션: '경복궁주차장' 검색</li>
       </ul>
-      <img class="location-static-map" src="assets/p7_map_v2.png" alt="오시는 길 약도" />
+      <img class="location-static-map" src="assets/p7_map_v3.png" alt="오시는 길 약도" />
       <p class="location-map-caption">경복궁역 5번 출구에서 나와서 앞으로 직진하시면<br>예식장소인 은행나무가 보입니다</p>
     </div>
 
@@ -932,8 +938,7 @@
   <section class="notice-section">
     <h2 class="notice-title">Notice</h2>
     <p class="notice-body">
-      국립고궁박물관은 시설 특성상 화환 반입이 금지되어 있어<br>
-      화환은 정중히 사양하오니<br>
+      국립고궁박물관은 시설 특성상 화환 반입이 금지되어 있어 화환은 정중히 사양하오니<br>
       너그러운 마음으로 협조해 주시면 감사하겠습니다.
     </p>
   </section>
@@ -990,7 +995,7 @@
     const img = document.querySelector('.inner-full-img');
     const patch = document.getElementById('innerTextPatch');
     if (!img || !patch || !img.offsetHeight) return;
-    const overlapPx = img.offsetHeight * 0.43; /* 부부 발끝과 텍스트 사이 여백을 줄이기 위해 패치를 더 위로 */
+    const overlapPx = img.offsetHeight * 0.4816; /* 잔디 언덕이 창 너비만큼 완전히 퍼지는 지점(원본 이미지 기준 약 51.8%)에 정확히 맞춰 이어붙임 */
     patch.style.marginTop = (-overlapPx) + 'px';
   }
   window.addEventListener('load', positionInnerPatch);
@@ -1132,59 +1137,6 @@
   window.addEventListener('resize', fitIntroCanvas);
   window.addEventListener('load', fitIntroCanvas);
   fitIntroCanvas();
-
-  /* ---- 인트로 타이핑 효과 ---- */
-  (function () {
-    const line1 = document.getElementById('introLine1');
-    const line2 = document.getElementById('introLine2');
-    const text1 = '2026년 10월 17일 토요일 오후 3시';
-    const text2 = '경복궁 국립고궁박물관 옆 은행나무 아래';
-    const typeSpeed = 90;
-    const lineGap = 450;
-
-    const cursor = document.createElement('span');
-    cursor.className = 'intro-cursor';
-
-    function typeInto(el, text, speed, onDone) {
-      let i = 0;
-      el.appendChild(cursor);
-      function step() {
-        if (i < text.length) {
-          el.insertBefore(document.createTextNode(text[i]), cursor);
-          i++;
-          setTimeout(step, speed);
-        } else if (onDone) {
-          onDone();
-        }
-      }
-      step();
-    }
-
-    function startTyping() {
-      typeInto(line1, text1, typeSpeed, () => {
-        setTimeout(() => {
-          typeInto(line2, text2, typeSpeed, () => {
-            setTimeout(() => { cursor.style.opacity = '0'; }, 1400);
-          });
-        }, lineGap);
-      });
-    }
-
-    const introEl = document.getElementById('introCanvas');
-    let started = false;
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !started) {
-          started = true;
-          startTyping();
-          observer.disconnect();
-        }
-      });
-    }, { threshold: 0.4 });
-    observer.observe(introEl);
-  })();
-
-
 
   /* ---- 포토 갤러리: 더보기 / 접기 ---- */
   const photoFiles = [
