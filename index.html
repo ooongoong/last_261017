@@ -1094,7 +1094,7 @@
     step();
   }
 
-  /* ---- 속지가 화면에 들어오면, 위→아래로 서서히 내려오는 효과 재생 후 타이핑 시작 ---- */
+  /* ---- 속지가 화면에 들어오면, 위→아래로 내려오는 효과 재생 + 스크롤되자마자 빠르게 타이핑 시작 ---- */
   (function () {
     const innerWindow = document.getElementById('innerWindow');
     let started = false;
@@ -1105,16 +1105,12 @@
         if (entry.isIntersecting && !started) {
           started = true;
           innerWindow.classList.add('revealed');
-          const onDone = (e) => {
-            if (e.propertyName !== 'clip-path') return;
-            innerWindow.removeEventListener('transitionend', onDone);
-            if (!typingStarted) {
-              typingStarted = true;
-              const lines = document.querySelectorAll('.inner-line');
-              typeLines(lines, 42, 200, 0);
-            }
-          };
-          innerWindow.addEventListener('transitionend', onDone);
+          if (!typingStarted) {
+            typingStarted = true;
+            const lines = document.querySelectorAll('.inner-line');
+            /* 커튼이 다 내려올 때까지(3.8s) 기다리지 않고, 스크롤되자마자 짧은 지연 후 바로 타이핑 시작 */
+            setTimeout(() => typeLines(lines, 32, 120, 0), 500);
+          }
           observer.disconnect();
         }
       });
