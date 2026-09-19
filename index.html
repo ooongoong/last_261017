@@ -219,6 +219,13 @@
     background: #4a4640;
     transform: scale(1.35);
   }
+  .story-dots.light .story-dot {
+    background: rgba(255,255,255,0.55);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.25);
+  }
+  .story-dots.light .story-dot.active {
+    background: #fffefc;
+  }
 
   /* ============ INNER (속지) REVEAL SECTION ============ */
   .inner-wrap {
@@ -972,7 +979,7 @@
   <!-- ============ STORY 2 (웨딩 갤러리 앞) ============ -->
   <section class="story-slider" id="story2">
     <div class="story-track" id="story2Track"></div>
-    <div class="story-dots" id="story2Dots"></div>
+    <div class="story-dots light" id="story2Dots"></div>
   </section>
 
   <!-- ============ PHOTO SECTION ============ -->
