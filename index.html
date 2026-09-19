@@ -177,6 +177,10 @@
     -ms-overflow-style: none;
   }
   .story-track::-webkit-scrollbar { display: none; }
+  @media (hover: hover) and (pointer: fine) {
+    .story-track { cursor: grab; }
+    .story-track.dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
+  }
   .story-slide {
     flex: 0 0 100%;
     width: 100%;
@@ -1217,6 +1221,47 @@
         ticking = false;
       });
     }, { passive: true });
+
+    /* 데스크탑(마우스)에서도 드래그로 넘길 수 있게 */
+    let isDown = false;
+    let dragStartX = 0;
+    let scrollStart = 0;
+    let moved = false;
+
+    track.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'touch') return; // 터치는 브라우저 기본 스와이프 사용
+      isDown = true;
+      moved = false;
+      dragStartX = e.clientX;
+      scrollStart = track.scrollLeft;
+      track.classList.add('dragging');
+      track.setPointerCapture(e.pointerId);
+    });
+    track.addEventListener('pointermove', (e) => {
+      if (!isDown) return;
+      const dx = e.clientX - dragStartX;
+      if (Math.abs(dx) > 3) moved = true;
+      track.scrollLeft = scrollStart - dx;
+    });
+    function endDrag(e) {
+      if (!isDown) return;
+      isDown = false;
+      track.classList.remove('dragging');
+      // 드래그가 끝나면 가장 가까운 슬라이드로 스냅
+      const idx = Math.round(track.scrollLeft / track.clientWidth);
+      track.scrollTo({ left: idx * track.clientWidth, behavior: 'smooth' });
+    }
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointerleave', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+
+    /* 마우스 휠(세로 스크롤)도 좌우 이동으로 변환 */
+    track.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        track.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
   }
 
   buildStorySlider('story1Track', 'story1Dots', 'story1', 7);
