@@ -159,15 +159,59 @@
     display: block;
   }
 
-  /* ============ VIDEO SECTIONS ============ */
-  .video-section {
+  /* ============ STORY SLIDER (파노라마처럼 이어지는 스와이프) ============ */
+  .story-slider {
     max-width: 480px;
     margin: 0 auto;
+    overflow: hidden;
     background: #000;
+    position: relative;
   }
-  .video-section video {
+  .story-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .story-track::-webkit-scrollbar { display: none; }
+  .story-slide {
+    flex: 0 0 100%;
     width: 100%;
+    aspect-ratio: 4 / 5;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+  .story-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+  }
+  .story-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+    z-index: 2;
+  }
+  .story-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.45);
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .story-dot.active {
+    background: #fffefc;
+    transform: scale(1.35);
   }
 
   /* ============ INNER (속지) REVEAL SECTION ============ */
@@ -857,9 +901,10 @@
     <img src="assets/cover_full_v2.png" alt="청첩장 겉지" />
   </section>
 
-  <!-- ============ VIDEO 1 (속지 앞) ============ -->
-  <section class="video-section">
-    <video src="assets/video_1.mp4" poster="assets/video_1_poster.jpg" controls playsinline preload="metadata"></video>
+  <!-- ============ STORY 1 (속지 앞) ============ -->
+  <section class="story-slider" id="story1">
+    <div class="story-track" id="story1Track"></div>
+    <div class="story-dots" id="story1Dots"></div>
   </section>
 
   <!-- ============ INNER (속지) REVEAL SECTION ============ -->
@@ -912,9 +957,10 @@
     <img src="assets/calendar.jpg" alt="10월 캘린더" />
   </section>
 
-  <!-- ============ VIDEO 2 (웨딩 갤러리 앞) ============ -->
-  <section class="video-section">
-    <video src="assets/video_2.mp4" poster="assets/video_2_poster.jpg" controls playsinline preload="metadata"></video>
+  <!-- ============ STORY 2 (웨딩 갤러리 앞) ============ -->
+  <section class="story-slider" id="story2">
+    <div class="story-track" id="story2Track"></div>
+    <div class="story-dots" id="story2Dots"></div>
   </section>
 
   <!-- ============ PHOTO SECTION ============ -->
@@ -1138,6 +1184,43 @@
     }, { threshold: 0.15 });
     observer.observe(innerWrap);
   })();
+
+  /* ---- 스토리 슬라이더 (사진이 파노라마처럼 이어지는 스와이프) ---- */
+  function buildStorySlider(trackId, dotsId, folder, count) {
+    const track = document.getElementById(trackId);
+    const dotsWrap = document.getElementById(dotsId);
+    if (!track || !dotsWrap) return;
+
+    for (let i = 1; i <= count; i++) {
+      const slide = document.createElement('div');
+      slide.className = 'story-slide';
+      const img = document.createElement('img');
+      img.src = `assets/${folder}/${i}.jpg`;
+      img.alt = '';
+      img.loading = i === 1 ? 'eager' : 'lazy';
+      slide.appendChild(img);
+      track.appendChild(slide);
+
+      const dot = document.createElement('span');
+      dot.className = 'story-dot' + (i === 1 ? ' active' : '');
+      dotsWrap.appendChild(dot);
+    }
+
+    const dots = dotsWrap.querySelectorAll('.story-dot');
+    let ticking = false;
+    track.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const idx = Math.round(track.scrollLeft / track.clientWidth);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
+  buildStorySlider('story1Track', 'story1Dots', 'story1', 7);
+  buildStorySlider('story2Track', 'story2Dots', 'story2', 14);
 
   /* ---- 청첩장 공유하기 (URL 복사) ---- */
   (function () {
